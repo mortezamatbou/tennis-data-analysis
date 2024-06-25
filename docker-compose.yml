@@ -1,0 +1,14 @@
+services:
+  mariadb:
+    image: mariadb
+    ports:
+      - "3308:3306"
+    environment:
+      - MARIADB_ROOT_PASSWORD=${DB_PASSWORD}
+      - MARIADB_ALLOW_EMPTY_PASSWORD=false
+      - MARIADB_USER=${DB_USERNAME}
+      - MARIADB_PASSWORD=${DB_PASSWORD}
+      - MARIADB_DATABASE=${DB_DATABASE}
+    volumes:
+      - "./docker-volume/mariadb:/var/lib/mysql"
+      - "./docker-volume/Tennis-MySQL-Schema.sql:/docker-entrypoint-initdb.d/init.sql"
