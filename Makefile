@@ -57,8 +57,14 @@ create_environment:
 
 ## Make Dataset
 .PHONY: data
-data: requirements
+data:
 	$(PYTHON_INTERPRETER) tennis_data_analysis/data/make_dataset.py
+
+
+# Insert cleand data to database
+.PHONY: data_to_db
+data_to_db:
+	$(PYTHON_INTERPRETER) tennis_data_analysis/data/make_dataset_to_db.py
 
 
 #################################################################################
