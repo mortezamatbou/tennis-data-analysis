@@ -19,4 +19,184 @@ conn = mysql.connector.connect(
 )
 
 db = conn.cursor()
-print(db)
+
+"""
+Table details:
+
+
+01]
+MatchEventInfo
+    match_id,
+    first_to_serve,
+    home_team_seed,
+    away_team_seed,
+    custom_id,
+    winner_code,
+    default_period_count,
+    start_datetime,
+    match_slug,
+    final_result_only
+
+.
+.
+.
+
+MatchTournamentInfo
+    match_id,
+    tournament_id,
+    tournament_name,
+    tournament_slug,
+    tournament_unique_id,
+    tournament_category_name,
+    tournament_category_slug,
+    user_count,
+    ground_type,
+    tennis_points,
+    has_event_player_statistics,
+    crowd_sourcing_enabled,
+    has_performance_graph_feature,
+    display_inverse_home_away_teams,
+    priority
+    competition_type
+---------------------------------
+MatchHomeScoreInfo
+    match_id,
+    current_score,
+    display_score,
+    period_1,
+    period_2,
+    period_3,
+    period_4,
+    period_5,
+    period_1_tie_break,
+    period_2_tie_break,
+    period_3_tie_break,
+    period_4_tie_break,
+    period_5_tie_break,
+    normal_time
+---------------------------------
+MatchHomeTeamInfo
+    match_id,
+    name,
+    slug,
+    gender,
+    user_count,
+    residence,
+    birthplace,
+    height,
+    weight,
+    plays,
+    turned_pro,
+    current_prize,
+    total_prize,
+    player_id,
+    current_rank,
+    name_code,
+    country,
+    full_name
+---------------------------------
+MatchAwayScoreInfo
+    match_id,
+    current_score,
+    display_score,
+    period_1,
+    period_2,
+    period_3,
+    period_4,
+    period_5,
+    period_1_tie_break,
+    period_2_tie_break,
+    period_3_tie_break,
+    period_4_tie_break,
+    period_5_tie_break,
+    normal_time
+---------------------------------
+MatchAwayTeamInfo
+    match_id,
+    name,
+    slug,
+    gender,
+    user_count,
+    residence,
+    birthplace,
+    height,
+    weight,
+    plays,
+    turned_pro,
+    current_prize,
+    total_prize,
+    player_id,
+    current_rank,
+    name_code,
+    country,
+    full_name
+---------------------------------
+MatchVenueInfo
+    match_id,
+    city,
+    stadium,
+    venue_id,
+    country
+---------------------------------
+MatchSeasonInfo
+    match_id,
+    season_id,
+    name,
+    year
+---------------------------------
+MatchVotesInfo
+    match_id,
+    home_vote,
+    away_vote
+---------------------------------
+MatchRoundInfo
+    match_id,
+    round_id,
+    name,
+    slug,
+    cup_round_type
+---------------------------------
+MatchTimeInfo
+    match_id,
+    period_1,
+    period_2,
+    period_3,
+    period_4,
+    period_5,
+    current_period_start_timestamp
+---------------------------------
+PeriodInfo
+---------------------------------
+GameInfo
+    match_id,
+    set_id,
+    game_id,
+    point_id,
+    home_point,
+    away_point,
+    point_description,
+    home_point_type,
+    away_point_type,
+    home_score
+---------------------------------
+OddsInfo
+    match_id,
+    market_id,
+    market_name,
+    is_live,
+    suspended,
+    initial_fractional_value,
+    fractional_value,
+    choice_name,
+    choice_source_id,
+    winnig,
+    change
+---------------------------------
+PowerInfo
+    match_id,
+    set_num,
+    game_num,
+    value,
+    break_occurred
+
+"""
