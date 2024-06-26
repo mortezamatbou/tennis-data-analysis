@@ -245,5 +245,5 @@ CREATE TABLE Players (
     `name_code` VARCHAR(10),
     `country` VARCHAR(20),
     `full_name` VARCHAR(50)
-); CREATE INDEX slug_index ON players (slug);
+); CREATE INDEX slug_index ON Players (slug);
 
