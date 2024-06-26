@@ -1,5 +1,6 @@
 import os
 from dotenv import load_dotenv, find_dotenv
+import pandas as pd
 import mysql.connector
 
 
@@ -200,3 +201,64 @@ PowerInfo
     break_occurred
 
 """
+# give a dataframe, generate sql and execute
+def df_to_table(table_name: str, df: pd.DataFrame):
+    
+    columns = ",".join(df.columns.to_list())
+    holders = ",".join(["%s"] * df.columns.size)
+    sql = f'INSERT INTO {table_name}({columns}) VALUES({holders})'
+    for index, row in df.iterrows():
+        values = tuple(row.values)
+        try:
+            db.execute(sql, values)
+        except Exception as error:
+            print(row.iloc[1])
+            exit()
+    
+    conn.commit()
+
+
+# Find unique players from MatchAwayTeamInfo and MatchHomeTeamInfo
+
+V1_DATA_RAW_DIR = os.path.abspath('./data/raw/01')
+
+df_away = pd.read_parquet(V1_DATA_RAW_DIR + '/MatchAwayTeamInfo.parquet')
+df_home = pd.read_parquet(V1_DATA_RAW_DIR + '/MatchHomeTeamInfo.parquet')
+
+players = pd.concat([pd.Series(df_away['slug'].unique()), pd.Series(df_home['slug'].unique())], axis=0)
+
+players = pd.Series(players.unique())
+players.dropna(inplace=True)
+
+unique_players = []
+
+for slug in players:
+    player = df_away[df_away['slug'] == slug]
+    if player.size:
+        unique_players.append(player.iloc[0])
+        continue
+    
+    player = df_home[df_home['slug'] == slug]
+    if player.size:
+        unique_players.append(player.iloc[0])
+
+    
+df = pd.DataFrame(unique_players)
+
+
+df = df.dropna(axis=1, how='all')
+# drop match_id column
+df = df.drop(columns=['match_id'], axis=1)
+df.reset_index(inplace=True, drop=True)
+
+# save dataframe to new parquet file
+
+df['height'] = df['height'].fillna(df['height'].mean())
+df['weight'] = df['weight'].fillna(df['weight'].mean())
+df['current_prize'] = df['current_prize'].fillna(0)
+df['total_prize'] = df['total_prize'].fillna(0)
+df['current_rank'] = df['current_rank'].fillna(0)
+
+db.execute("TRUNCATE TABLE Players")
+df_to_table('Players', df[['name', 'slug', 'gender', 'height', 'weight', 'plays', 'turned_pro', 'current_prize', 'total_prize', 'player_id', 'current_rank', 'country', 'full_name']])
+
