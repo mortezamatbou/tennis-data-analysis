@@ -223,3 +223,27 @@ ALTER TABLE `OddsInfo` ADD FOREIGN KEY (`match_id`) REFERENCES `MatchEventInfo` 
 ALTER TABLE `PowerInfo` ADD FOREIGN KEY (`match_id`) REFERENCES `MatchEventInfo` (`match_id`);
 
 ALTER TABLE `PeriodInfo` ADD FOREIGN KEY (`match_id`) REFERENCES `MatchEventInfo` (`match_id`);
+
+
+-- 
+CREATE TABLE Players (
+    `id` INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `name` VARCHAR(255),
+    `slug` VARCHAR(255),
+    `gender` VARCHAR(1),
+    `user_count` INTEGER,
+    `residence` VARCHAR(255),
+    `birthplace` VARCHAR(100),
+    `height` FLOAT,
+    `weight` INTEGER,
+    `plays` VARCHAR(50),
+    `turned_pro` INTEGER,
+    `current_prize` INTEGER,
+    `total_prize` INTEGER,
+    `player_id` INTEGER,
+    `current_rank` INTEGER,
+    `name_code` VARCHAR(10),
+    `country` VARCHAR(20),
+    `full_name` VARCHAR(50)
+); CREATE INDEX slug_index ON players (slug);
+
