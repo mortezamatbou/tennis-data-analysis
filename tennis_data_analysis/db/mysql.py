@@ -3,7 +3,7 @@ import mysql.connector
 
 class Database:
 
-    def __init__(self, host, user, password, dbname, port) -> None:
+    def __init__(self, host, user, password, dbname, port, dictionary=False) -> None:
         try:
             self.__conn = mysql.connector.connect(
                 host=host,
@@ -12,7 +12,7 @@ class Database:
                 database=dbname,
                 port=port
             )
-            self.db = self.__conn.cursor()
+            self.db = self.__conn.cursor(dictionary=dictionary)
         except Exception as error:
             print("Database connection error")
             print(error)
