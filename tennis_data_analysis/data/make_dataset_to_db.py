@@ -2,19 +2,20 @@ import os
 from dotenv import load_dotenv, find_dotenv
 import pandas as pd
 import numpy as np
-import tennis_data_analysis.db.mysql as mysql
+from tennis_data_analysis.db.mysql import Database
+from tennis_data_analysis.config import RAW_DATA_DIR
 
 
 # find .env automagically by walking up directories until it's found
 dotenv_path = find_dotenv()
 # load up the entries as environment variables
 load_dotenv(dotenv_path)
+V1_DATA_RAW_DIR = RAW_DATA_DIR / '01'
 
 
 # instance of database object from module
-mysql = mysql.Database(os.environ.get('DB_HOST'), os.environ.get('DB_USERNAME'), os.environ.get('DB_PASSWORD'), os.environ.get('DB_DATABASE'), os.environ.get('DB_PORT'))
+mysql = Database(os.environ.get('DB_HOST'), os.environ.get('DB_USERNAME'), os.environ.get('DB_PASSWORD'), os.environ.get('DB_DATABASE'), os.environ.get('DB_PORT'))
 
-exit()
 # give a dataframe, generate sql and execute
 
 
@@ -54,13 +55,10 @@ def votes_to_table(table_name: str, df: pd.DataFrame):
     mysql.commit()
 
 
-V1_DATA_RAW_DIR = os.path.abspath('./data/raw/01')
-
 # ------- Find unique players from MatchAwayTeamInfo and MatchHomeTeamInfo ---------------------------------
 
-
-df_away = pd.read_parquet(V1_DATA_RAW_DIR + '/MatchAwayTeamInfo.parquet')
-df_home = pd.read_parquet(V1_DATA_RAW_DIR + '/MatchHomeTeamInfo.parquet')
+df_away = pd.read_parquet(V1_DATA_RAW_DIR / 'MatchAwayTeamInfo.parquet')
+df_home = pd.read_parquet(V1_DATA_RAW_DIR / 'MatchHomeTeamInfo.parquet')
 
 players = pd.concat([pd.Series(df_away['slug'].unique()), pd.Series(df_home['slug'].unique())], axis=0)
 
@@ -104,7 +102,7 @@ df_to_table('Players', df)
 
 # --------- Add MatchEventInfo dataframe to MatchEventInfo table ----------------
 
-df = pd.read_parquet(V1_DATA_RAW_DIR + '/MatchEventInfo.parquet')
+df = pd.read_parquet(V1_DATA_RAW_DIR / 'MatchEventInfo.parquet')
 
 df['home_team_seed'] = df['home_team_seed'].fillna(0)
 df['away_team_seed'] = df['away_team_seed'].fillna(0)
@@ -118,12 +116,12 @@ df_to_table('MatchEventInfo', df)
 
 # --------- Add GameInfo dataframe to GameInfo table ----------------
 
-df = pd.read_parquet(V1_DATA_RAW_DIR + '/GameInfo.parquet')
+df = pd.read_parquet(V1_DATA_RAW_DIR / 'GameInfo.parquet')
 df_to_table('GameInfo', df)
 
 # --------- Add MatchHomeTeamInfo dataframe to MatchHomeTeamInfo table ----------------
 
-df = pd.read_parquet(V1_DATA_RAW_DIR + '/MatchHomeTeamInfo.parquet')
+df = pd.read_parquet(V1_DATA_RAW_DIR / 'MatchHomeTeamInfo.parquet')
 df['gender'] = df['gender'].fillna('U')
 df['turned_pro'] = df['turned_pro'].fillna(0)
 df['plays'] = df['plays'].fillna('Undefined')
@@ -138,7 +136,7 @@ df_to_table('MatchHomeTeamInfo', df)
 
 # --------- Add MatchAwayTeamInfo dataframe to MatchAwayTeamInfo table ----------------
 
-df = pd.read_parquet(V1_DATA_RAW_DIR + '/MatchAwayTeamInfo.parquet')
+df = pd.read_parquet(V1_DATA_RAW_DIR / 'MatchAwayTeamInfo.parquet')
 df['gender'] = df['gender'].fillna('U')
 df['turned_pro'] = df['turned_pro'].fillna(0)
 df['plays'] = df['plays'].fillna('Undefined')
@@ -154,7 +152,7 @@ df_to_table('MatchAwayTeamInfo', df)
 
 # --------- Add PowerInfo dataframe to PowerInfo table ----------------
 
-df = pd.read_parquet(V1_DATA_RAW_DIR + '/PowerInfo.parquet')
+df = pd.read_parquet(V1_DATA_RAW_DIR / 'PowerInfo.parquet')
 df['break_occurred'] = df['break_occurred'].fillna('U').map({np.True_: 1, np.False_: 0, 'U': -1})
 
 df_to_table('PowerInfo', df)
@@ -162,7 +160,7 @@ df_to_table('PowerInfo', df)
 
 # --------- Add MatchTimeInfo dataframe to MatchTimeInfo table ----------------
 
-df = pd.read_parquet(V1_DATA_RAW_DIR + '/TimeInfo.parquet')
+df = pd.read_parquet(V1_DATA_RAW_DIR / 'TimeInfo.parquet')
 
 df['period_1'] = df['period_1'].fillna(0)
 df['period_2'] = df['period_2'].fillna(0)
@@ -175,28 +173,28 @@ df_to_table('MatchTimeInfo', df)
 
 
 # --------- Add OddsInfo dataframe to OddsInfo table ----------------
-# df = pd.read_parquet(V1_DATA_RAW_DIR + '/OddsInfo.parquet')
+# df = pd.read_parquet(V1_DATA_RAW_DIR / 'OddsInfo.parquet')
 # df_to_table('OddsInfo', df)
 
 
 # --------- Add MatchVenueInfo dataframe to MatchVenueInfo table ----------------
-df = pd.read_parquet(V1_DATA_RAW_DIR + '/MatchVenueInfo.parquet')
+df = pd.read_parquet(V1_DATA_RAW_DIR / 'MatchVenueInfo.parquet')
 df_to_table('MatchVenueInfo', df)
 
 # --------- Add MatchSeasonInfo dataframe to MatchSeasonInfo table ----------------
 
-df = pd.read_parquet(V1_DATA_RAW_DIR + '/MatchSeasonInfo.parquet')
+df = pd.read_parquet(V1_DATA_RAW_DIR / 'MatchSeasonInfo.parquet')
 df_to_table('MatchSeasonInfo', df)
 
 
 # --------- Add MatchVotesInfo dataframe to MatchVotesInfo table ----------------
-df = pd.read_parquet(V1_DATA_RAW_DIR + '/MatchVotesInfo.parquet')
+df = pd.read_parquet(V1_DATA_RAW_DIR / 'MatchVotesInfo.parquet')
 votes_to_table('MatchVotesInfo', df)
 
 
 # --------- Add MatchRoundInfo dataframe to MatchRoundInfo table ----------------
 
-df = pd.read_parquet(V1_DATA_RAW_DIR + '/MatchRoundInfo.parquet')
+df = pd.read_parquet(V1_DATA_RAW_DIR / 'MatchRoundInfo.parquet')
 df['cup_round_type'] = df['cup_round_type'].fillna(0)
 
 df_to_table('MatchRoundInfo', df)
@@ -204,7 +202,7 @@ df_to_table('MatchRoundInfo', df)
 
 # --------- Add MatchTournamentInfo dataframe to MatchTournamentInfo table ----------------
 
-df = pd.read_parquet(V1_DATA_RAW_DIR + '/MatchTournamentInfo.parquet')
+df = pd.read_parquet(V1_DATA_RAW_DIR / 'MatchTournamentInfo.parquet')
 
 df['tournament_unique_id'] = df['tournament_unique_id'].fillna(0)
 df['ground_type'] = df['ground_type'].fillna('Undefined')
@@ -216,7 +214,7 @@ df_to_table('MatchTournamentInfo', df)
 
 # --------- Add MatchHomeScoreInfo dataframe to MatchHomeScoreInfo table ----------------
 
-df = pd.read_parquet(V1_DATA_RAW_DIR + '/MatchHomeScoreInfo.parquet')
+df = pd.read_parquet(V1_DATA_RAW_DIR / 'MatchHomeScoreInfo.parquet')
 
 df['period_1'] = df['period_1'].fillna(-1)
 df['period_2'] = df['period_2'].fillna(-1)
@@ -230,7 +228,7 @@ df = df[['match_id', 'current_score', 'display_score', 'period_1', 'period_2', '
 df_to_table('MatchHomeScoreInfo', df)
 
 # --------- Add MatchAwayScoreInfo dataframe to MatchAwayScoreInfo table ----------------
-df = pd.read_parquet(V1_DATA_RAW_DIR + '/MatchAwayScoreInfo.parquet')
+df = pd.read_parquet(V1_DATA_RAW_DIR / 'MatchAwayScoreInfo.parquet')
 
 df['period_1'] = df['period_1'].fillna(-1)
 df['period_2'] = df['period_2'].fillna(-1)
