@@ -93,8 +93,8 @@ df['weight'] = df['weight'].fillna(df['weight'].mean())
 df['current_prize'] = df['current_prize'].fillna(0)
 df['total_prize'] = df['total_prize'].fillna(0)
 df['current_rank'] = df['current_rank'].fillna(0)
+df.loc[df['turned_pro'] == 'Unknown', 'turned_pro'] = 0
 
-df.to_parquet()
 df = df[['name', 'slug', 'gender', 'height', 'weight', 'plays', 'turned_pro', 'current_prize', 'total_prize', 'player_id', 'current_rank', 'country', 'full_name']]
 
 df_to_table('Players', df)
@@ -123,7 +123,8 @@ df_to_table('GameInfo', df)
 
 df = pd.read_parquet(V1_DATA_RAW_DIR / 'MatchHomeTeamInfo.parquet')
 df['gender'] = df['gender'].fillna('U')
-df['turned_pro'] = df['turned_pro'].fillna(0)
+# df['turned_pro'] = df['turned_pro'].fillna(0)
+df.loc[df['turned_pro'] == 'Unknown', 'turned_pro'] = 0
 df['plays'] = df['plays'].fillna('Undefined')
 df['weight'] = df['weight'].fillna(df['weight'].mean())
 df['height'] = df['height'].fillna(df['height'].mean())
@@ -138,7 +139,8 @@ df_to_table('MatchHomeTeamInfo', df)
 
 df = pd.read_parquet(V1_DATA_RAW_DIR / 'MatchAwayTeamInfo.parquet')
 df['gender'] = df['gender'].fillna('U')
-df['turned_pro'] = df['turned_pro'].fillna(0)
+# df['turned_pro'] = df['turned_pro'].fillna(0)
+df.loc[df['turned_pro'] == 'Unknown', 'turned_pro'] = 0
 df['plays'] = df['plays'].fillna('Undefined')
 df['weight'] = df['weight'].fillna(df['weight'].mean())
 df['height'] = df['height'].fillna(df['height'].mean())
@@ -204,7 +206,8 @@ df_to_table('MatchRoundInfo', df)
 
 df = pd.read_parquet(V1_DATA_RAW_DIR / 'MatchTournamentInfo.parquet')
 
-df['tournament_unique_id'] = df['tournament_unique_id'].fillna(0)
+# df['tournament_unique_id'] = df['tournament_unique_id'].fillna(0)
+
 df['ground_type'] = df['ground_type'].fillna('Undefined')
 df['tennis_points'] = df['tennis_points'].fillna(df['tennis_points'].mean())
 
