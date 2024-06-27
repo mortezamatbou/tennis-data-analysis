@@ -115,7 +115,7 @@ six==1.16.0
 sniffio==1.3.1
 soupsieve==2.5
 stack-data==0.6.3
--e git+ssh://git@github.com/mortezamatbou/tennis-data-analysis.git@aec73bb18ba288a70158c4b1467edc3074ea9761#egg=tennis_data_analysis
+-e git+ssh://git@github.com/mortezamatbou/tennis-data-analysis.git@ca314bb1971f6e7059ea5e9e6ffba652a11c5f1d#egg=tennis_data_analysis
 terminado==0.18.1
 tinycss2==1.3.0
 tomli==2.0.1
