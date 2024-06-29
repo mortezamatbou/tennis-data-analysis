@@ -38,7 +38,7 @@ CREATE TABLE `GameInfo` (
   `serving` int(11) DEFAULT NULL,
   `scoring` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1467014 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -65,7 +65,7 @@ CREATE TABLE `MatchAwayScoreInfo` (
   `period_5_tie_break` int(11) DEFAULT NULL,
   `normal_time` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19677 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,7 +96,7 @@ CREATE TABLE `MatchAwayTeamInfo` (
   `country` varchar(255) DEFAULT NULL,
   `full_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12956 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -119,7 +119,7 @@ CREATE TABLE `MatchEventInfo` (
   `match_slug` varchar(255) DEFAULT NULL,
   `final_result_only` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19677 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -146,7 +146,7 @@ CREATE TABLE `MatchHomeScoreInfo` (
   `period_5_tie_break` int(11) DEFAULT NULL,
   `normal_time` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19677 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -177,7 +177,7 @@ CREATE TABLE `MatchHomeTeamInfo` (
   `country` varchar(255) DEFAULT NULL,
   `full_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14091 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -195,7 +195,7 @@ CREATE TABLE `MatchRoundInfo` (
   `slug` varchar(255) DEFAULT NULL,
   `cup_round_type` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12088 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -212,7 +212,7 @@ CREATE TABLE `MatchSeasonInfo` (
   `name` varchar(100) DEFAULT NULL,
   `year` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19677 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -232,7 +232,7 @@ CREATE TABLE `MatchTimeInfo` (
   `period_5` int(11) DEFAULT NULL,
   `current_period_start_timestamp` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19677 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -261,7 +261,7 @@ CREATE TABLE `MatchTournamentInfo` (
   `priority` int(11) DEFAULT NULL,
   `competition_type` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19677 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -279,7 +279,7 @@ CREATE TABLE `MatchVenueInfo` (
   `venue_id` int(11) DEFAULT NULL,
   `country` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19590 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -295,7 +295,7 @@ CREATE TABLE `MatchVotesInfo` (
   `home_vote` int(11) DEFAULT NULL,
   `away_vote` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19678 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -374,7 +374,7 @@ CREATE TABLE `Players` (
   `full_name` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `slug_index` (`slug`)
-) ENGINE=InnoDB AUTO_INCREMENT=2354 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -392,7 +392,7 @@ CREATE TABLE `PowerInfo` (
   `value` float DEFAULT NULL,
   `break_occurred` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=269695 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -405,3 +405,48 @@ CREATE TABLE `PowerInfo` (
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2024-06-27  6:49:17
+
+
+DROP TABLE IF EXISTS `GameInfoSets`;
+CREATE TABLE `GameInfoSets` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `match_id` int(11) NOT NULL,
+  `set_id` int(11) DEFAULT NULL,
+  `home_score` int(11) DEFAULT NULL,
+  `away_score` int(11) DEFAULT NULL,
+  `home_win` int(11) DEFAULT NULL,
+  `away_win` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+DROP TABLE IF EXISTS `GameInfoResult`;
+CREATE TABLE `GameInfoResult` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `match_id` int(11) NOT NULL,
+  `home_win` int(11) DEFAULT NULL,
+  `away_win` int(11) DEFAULT NULL,
+  `winner_player_id` int(11) DEFAULT NULL,
+  `loser_player_id` float DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+-- match_id index on tables
+ALTER TABLE GameInfo ADD INDEX `match_id_index` (`match_id`);
+ALTER TABLE MatchAwayScoreInfo ADD INDEX `match_id_index` (`match_id`);
+ALTER TABLE MatchAwayTeamInfo ADD INDEX `match_id_index` (`match_id`);
+ALTER TABLE MatchEventInfo ADD INDEX `match_id_index` (`match_id`);
+ALTER TABLE MatchHomeScoreInfo ADD INDEX `match_id_index` (`match_id`);
+ALTER TABLE MatchHomeTeamInfo ADD INDEX `match_id_index` (`match_id`);
+ALTER TABLE MatchRoundInfo ADD INDEX `match_id_index` (`match_id`);
+ALTER TABLE MatchSeasonInfo ADD INDEX `match_id_index` (`match_id`);
+ALTER TABLE MatchTimeInfo ADD INDEX `match_id_index` (`match_id`);
+ALTER TABLE MatchTournamentInfo ADD INDEX `match_id_index` (`match_id`);
+ALTER TABLE MatchVenueInfo ADD INDEX `match_id_index` (`match_id`);
+ALTER TABLE MatchVotesInfo ADD INDEX `match_id_index` (`match_id`);
+ALTER TABLE OddsInfo ADD INDEX `match_id_index` (`match_id`);
+ALTER TABLE PeriodInfo ADD INDEX `match_id_index` (`match_id`);
+ALTER TABLE PowerInfo ADD INDEX `match_id_index` (`match_id`);
+ALTER TABLE GameInfoSets ADD INDEX `match_id_index` (`match_id`);
+ALTER TABLE GameInfoResult ADD INDEX `match_id_index` (`match_id`);
