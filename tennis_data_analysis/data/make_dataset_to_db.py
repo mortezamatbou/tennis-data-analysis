@@ -14,7 +14,7 @@ V1_DATA_RAW_DIR = RAW_DATA_DIR / '01'
 
 
 # instance of database object from module
-mysql = Database(os.environ.get('DB_HOST'), os.environ.get('DB_USERNAME'), os.environ.get('DB_PASSWORD'), os.environ.get('DB_DATABASE'), os.environ.get('DB_PORT'))
+mysql = Database(os.environ.get('DB_HOST'), os.environ.get('DB_USERNAME'), os.environ.get('DB_PASSWORD'), os.environ.get('DB_DATABASE'), os.environ.get('DB_PORT'), True)
 
 # give a dataframe, generate sql and execute
 
@@ -243,3 +243,18 @@ df['display_score'] = df['display_score'].fillna(-1)
 
 df = df[['match_id', 'current_score', 'display_score', 'period_1', 'period_2', 'period_3', 'period_4', 'period_5']]
 df_to_table('MatchAwayScoreInfo', df)
+
+
+# --------- transform MatchTournamentInfo to tournaments table ----------------
+
+sql = '''
+INSERT INTO Tournaments(tournament_id, tournament_name, tournament_slug, tournament_category_name, tournament_category_slug, ground_type)
+SELECT tournament_id, tournament_name, tournament_slug, tournament_category_name, tournament_category_slug, ground_type
+FROM MatchTournamentInfo
+GROUP BY tournament_id
+ORDER BY tournament_id ASC
+'''
+mysql.db.execute(sql)
+mysql.commit()
+
+
