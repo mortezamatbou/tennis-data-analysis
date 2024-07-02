@@ -174,3 +174,4 @@ cython_debug/
 docker-volume/mariadb
 data/interim/
 data/processed/
+data/raw/*.zip
