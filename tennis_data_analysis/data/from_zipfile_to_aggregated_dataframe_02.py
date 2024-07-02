@@ -195,7 +195,7 @@ _files = [
         'destination_folder': INTERIM / "Pbp",
         'target_subdir': "raw_point_by_point_parquet",
         'target_filename_prefix': "pbp",
-        'result_parquet_name': 'MatchAwayScoreInfo'
+        'result_parquet_name': 'PBP'
     },
     {
         'source_root': INTERIM,
@@ -211,59 +211,29 @@ _files = [
 # Extract zip files
 extract_zip_files(RAW_DATA_DIR / '202405.zip', INTERIM / 'raw_data')
 
-
 for f in _files:
     collect_files(f['source_root'], f['destination_folder'], f['target_subdir'], f['target_filename_prefix'])
-    # df = create_dataframe(INTERIM / 'HomeTeamScore')
-    # df.to_parquet(PROCESSED / 'MatchHomeScoreInfo.parquet')
-
-
-# Integrate parquet files from different days to dataframes
-# Save integrated parquets file to /data/processed/02
-
-MatchHomeScoreInfo = create_dataframe(INTERIM / 'HomeTeamScore')
-MatchHomeScoreInfo.to_parquet(PROCESSED / 'MatchHomeScoreInfo.parquet')
-
-MatchAwayScoreInfo = create_dataframe(INTERIM / 'AwayTeamScore')
-MatchAwayScoreInfo.to_parquet(PROCESSED / 'MatchAwayScoreInfo.parquet')
-
-MatchHomeTeamInfo = create_dataframe(INTERIM / 'HomeTeam')
-MatchHomeTeamInfo.to_parquet(PROCESSED / 'MatchHomeTeamInfo.parquet')
-
-MatchAwayTeamInfo = create_dataframe(INTERIM / 'AwayTeam')
-MatchAwayTeamInfo.to_parquet(PROCESSED / 'MatchAwayTeamInfo.parquet')
-
-MatchEventInfo = create_dataframe(INTERIM / 'Event')
-MatchEventInfo.to_parquet(PROCESSED / 'MatchEventInfo.parquet')
-
-MatchRoundInfo = create_dataframe(INTERIM / 'Round')
-MatchRoundInfo.to_parquet(PROCESSED / 'MatchRoundInfo.parquet')
-
-MatchSeasonInfo = create_dataframe(INTERIM / 'Season')
-MatchSeasonInfo.to_parquet(PROCESSED / 'MatchSeasonInfo.parquet')
-
-TimeInfo = create_dataframe(INTERIM / 'Time')
-TimeInfo.to_parquet(PROCESSED / 'TimeInfo.parquet')
-
-MatchTournamentInfo = create_dataframe(INTERIM / 'Tournament')
-MatchTournamentInfo.to_parquet(PROCESSED / 'MatchTournamentInfo.parquet')
-
-MatchVenueInfo = create_dataframe(INTERIM / 'Venue')
-MatchVenueInfo.to_parquet(PROCESSED / 'MatchVenueInfo.parquet')
-
-PeriodInfo = create_dataframe(INTERIM / 'Statistics')
-PeriodInfo.to_parquet(PROCESSED / 'PeriodInfo.parquet')
+    df = create_dataframe(f['destination_folder'])
+    df.to_parquet(INTERIM / f'{f["result_parquet_name"]}.parquet')
 
 
 GameInfo = create_dataframe(INTERIM / 'GameInfo')
-GameInfo.to_parquet(PROCESSED / 'GameInfo.parquet')
+GameInfo.to_parquet(INTERIM / 'GameInfo.parquet')
+
 
 MatchVotesInfo = create_dataframe(INTERIM / 'Votes')
-MatchVotesInfo.to_parquet(PROCESSED / 'MatchVotesInfo.parquet')
+MatchVotesInfo.to_parquet(INTERIM / 'MatchVotesInfo.parquet')
+
 
 PowerInfo = create_dataframe(INTERIM / 'Power')
-PowerInfo.to_parquet(PROCESSED / 'PowerInfo.parquet')
+PowerInfo.to_parquet(INTERIM / 'PowerInfo.parquet')
+
 
 OddsInfo = create_dataframe(INTERIM / 'Odds')
-OddsInfo.to_parquet(PROCESSED / 'OddsInfo.parquet')
+OddsInfo.to_parquet(INTERIM / 'OddsInfo.parquet')
 
+
+
+# ------------------------------------------------------------------------------------------
+# cleaning process write parquet files to /data/processed/02 -------------------------------
+# ------------------------------------------------------------------------------------------
