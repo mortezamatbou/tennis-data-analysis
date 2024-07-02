@@ -172,3 +172,5 @@ cython_debug/
 .idea/
 
 docker-volume/mariadb
+data/interim/
+data/processed/
